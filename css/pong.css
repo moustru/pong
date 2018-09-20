@@ -1,0 +1,364 @@
+/*
+==========
+GLOBAL
+==========
+*/
+* {
+  box-sizing: border-box;
+  outline: none;
+  font-family: "PressStart", sans-serif;
+  font-weight: 800; }
+
+html, body {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  margin: 0; }
+
+body {
+  background-color: #001221; }
+
+/*
+==========
+SCROLLBAR
+==========
+*/
+::-webkit-scrollbar-track {
+  background-color: #a5a5a5; }
+
+::-webkit-scrollbar-thumb {
+  -webkit-border-radius: 0px;
+  border-radius: 0px; }
+
+::-webkit-scrollbar-thumb {
+  -webkit-border-radius: 0px;
+  border-radius: 0px;
+  background-color: #000; }
+
+::-webkit-scrollbar {
+  width: 7px; }
+
+/*
+==========
+LISTS
+==========
+*/
+ul {
+  margin: 0;
+  padding: 0; }
+  ul li {
+    list-style-type: none; }
+
+/*
+==========
+TEXT
+==========
+*/
+h1, h2, h3, h4, h5, h6, a, p, span {
+  margin: 0;
+  color: #fff; }
+
+a {
+  text-decoration: none; }
+
+/*
+==========
+GLOBAL CONTAINERS
+==========
+*/
+.main, header {
+  width: 90%;
+  margin: auto; }
+
+.block-box {
+  border: 5px solid #fff;
+  box-shadow: 0 0 7px 2px #fff; }
+
+/*
+==========
+INPUTS
+==========
+*/
+input, textarea {
+  position: relative;
+  background: transparent;
+  border: none;
+  border-bottom: 3px solid #a5a5a5;
+  margin: 15px 0;
+  padding: 20px;
+  color: #fff;
+  text-align: center;
+  transition: all 0.3s ease;
+  resize: none; }
+  input:focus, textarea:focus {
+    border-bottom: 3px solid #fff; }
+
+/*
+==========
+BUTTONS
+==========
+*/
+.btns {
+  display: block;
+  border: 3px solid #a5a5a5;
+  color: #000;
+  background: #a5a5a5;
+  padding: 15px;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.3s ease; }
+
+.btn-yes {
+  background: #008000;
+  border-color: #008000;
+  color: #fff; }
+  .btn-yes:hover {
+    background: #fff;
+    color: #008000;
+    box-shadow: 0 0 7px 3px #008000; }
+
+.btn-no {
+  background: red;
+  border-color: red;
+  color: #fff; }
+  .btn-no:hover {
+    background: #fff;
+    color: red;
+    box-shadow: 0 0 7px 3px red; }
+
+/*
+==========
+LINKS
+==========
+*/
+.links {
+  text-align: center; }
+
+/*
+==========
+POPUPS
+==========
+*/
+.popup {
+  position: fixed;
+  display: none;
+  width: 50%;
+  height: 40%;
+  top: 30%;
+  left: 25%;
+  padding: 30px;
+  border: 5px solid #fff;
+  box-shadow: 0 0 7px 2px #fff;
+  z-index: 9; }
+
+/*
+==========
+AVATAR
+==========
+*/
+.ava {
+  box-shadow: 0 0 7px 2px #fff; }
+  .ava-large {
+    width: 120px;
+    height: 120px; }
+  .ava-medium {
+    width: 80px;
+    height: 80px; }
+  .ava-small {
+    width: 40px;
+    height: 40px; }
+
+/*
+==========
+OVERLAY
+==========
+*/
+#overlay {
+  position: fixed;
+  display: none;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 8;
+  background-color: rgba(0, 0, 0, 0.91); }
+
+/*
+==========
+ANIMATIONS
+==========
+*/
+@keyframes showHorizontal {
+  0% {
+    opacity: 0;
+    right: 50px; }
+  100% {
+    opacity: 1;
+    right: 0px; } }
+
+@keyframes hideHorizontal {
+  0% {
+    opacity: 1;
+    right: 0px; }
+  100% {
+    opacity: 0;
+    right: 50px; } }
+
+@keyframes incorrectInput {
+  0%, 50% {
+    border-color: red;
+    left: 0px; }
+  25% {
+    border-color: red;
+    left: 20px; }
+  75% {
+    border-color: red;
+    left: -20px; }
+  100% {
+    border-color: #fff;
+    left: 0px; } }
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0; }
+  100% {
+    opacity: 1; } }
+
+@keyframes fadeOut {
+  0% {
+    opacity: 1; }
+  100% {
+    opacity: 0; } }
+
+@keyframes fadeInPopup {
+  0% {
+    opacity: 0;
+    transform: scale(1.3); }
+  100% {
+    opacity: 1;
+    transform: scale(1); } }
+
+@keyframes fadeOutFront {
+  0% {
+    opacity: 1;
+    transform: scale(1); }
+  100% {
+    opacity: 0;
+    transform: scale(1.3); } }
+
+@keyframes flashing {
+  0% {
+    opacity: 1; }
+  50% {
+    opacity: .3; }
+  100% {
+    opacity: 1; } }
+
+/*
+==========
+FONTS
+==========
+*/
+@font-face {
+  font-family: "PressStart";
+  src: url("../fonts/PressStart2P-Regular.ttf") format("truetype");
+  font-style: normal;
+  font-weight: normal; }
+
+/*
+==========
+GLOBAL
+==========
+*/
+/*
+==========
+HEADER
+==========
+*/
+header {
+  position: relative;
+  margin-bottom: 20px; }
+  header .header-title {
+    margin-bottom: 10px;
+    padding: 20px 0;
+    font-size: 72px;
+    text-align: center;
+    border-bottom: 8px dashed #fff;
+    user-select: none; }
+  header .header-scoreboard {
+    margin: 30px;
+    font-size: 72px;
+    color: #fff;
+    user-select: none;
+    text-align: center;
+  }
+
+/*
+==========
+SECTIONS
+==========
+*/
+.main-field {
+  position: relative;
+  width: 95%;
+  margin: auto; }
+  .main-field canvas {
+    width: 100%;
+    max-height: 600px;
+    background-color: #000;
+    border: 8px solid #fff; }
+  .main-field::before {
+    content: '';
+    position: absolute;
+    left: 49.3%;
+    height: 100%;
+    border-left: 8px dashed #fff;
+    z-index: 9; }
+  .main-field .field-win, .main-field .field-lose {
+    position: absolute;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: calc(100% + 16px);
+    height: calc(100% + 16px);
+    top: 0;
+    background-color: rgba(255, 255, 255, 0.8);
+    z-index: 9; }
+  .main-field .field-win {
+    display: none; }
+    .main-field .field-win .win-title {
+      padding-bottom: 30px;
+      font-size: 48px;
+      color: #000; }
+    .main-field .field-win .win-desc {
+      font-size: 24px;
+      color: #000; }
+  .main-field .field-lose {
+    display: none; }
+    .main-field .field-lose .lose-title {
+      padding-bottom: 30px;
+      font-size: 48px;
+      color: #000; }
+    .main-field .field-lose .lose-desc {
+      font-size: 24px;
+      color: #000; }
+
+/*
+==========
+FOOTER
+==========
+*/
+footer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 30px 0;
+  text-align: center; }
+  footer .btns {
+    width: 350px;
+    margin: 0 .5%;
+    padding: 20px;
+    font-size: 20px; }
+    footer .btns .btn-go {
+      margin-right: 20px; }
+
