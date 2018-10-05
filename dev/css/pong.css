@@ -153,23 +153,6 @@ POPUPS
 
 /*
 ==========
-AVATAR
-==========
-*/
-.ava {
-  box-shadow: 0 0 7px 2px #fff; }
-  .ava-large {
-    width: 120px;
-    height: 120px; }
-  .ava-medium {
-    width: 80px;
-    height: 80px; }
-  .ava-small {
-    width: 40px;
-    height: 40px; }
-
-/*
-==========
 OVERLAY
 ==========
 */
@@ -352,7 +335,7 @@ footer {
   display: flex;
   justify-content: center;
   align-items: center;
-  margin: 30px 0;
+  margin: 20px 0;
   text-align: center; }
   footer .btns {
     width: 350px;
