@@ -103,6 +103,17 @@ header {
             text-align: center;
             user-select: none;
         }
+
+        &-scores {
+            display: flex;
+            justify-content: center;
+            .score {
+                &-left, &-right {
+                    margin: 0 20px;
+                    text-align: center;
+                }
+            }
+        }
     }
 }
 
@@ -197,8 +208,7 @@ footer {
 
 @font-face {
     font-family: "PressStart";
-    src: url("../fonts/PressStart2P-Regular.woff") format("woff");
-    src: url("../fonts/PressStart2P-Regular.woff2") format("woff2");
+    src: url("../fonts/PressStart2P-Regular.ttf") format("truetype");
     font-style: normal;
     font-weight: normal; 
 }

@@ -22,6 +22,12 @@ let draw = (): void => {
     player2.render(ctx);
 }
 
+interface Player {
+    y: number,
+    h: number,
+    speed: number
+}
+
 class Sprite {
     x: number;
     y: number;
@@ -44,6 +50,8 @@ class Ball extends Sprite {
         super();
         this.x = canvas.width / 2 - 15;
         this.y = canvas.height / 2 - 15;
+        this.w = 20;
+        this.h = 20;
         this.xspeed = 5;
         this.yspeed = Math.floor(Math.random() * 6) + 2;
         this.boost = 1.07;
@@ -84,14 +92,14 @@ let moveBall = (): void => {
     if(ball.x < 0) {
         ball.xspeed = -ball.xspeed;
         player2.scores++;
-        document.querySelector('.score-right').innerHTML = player2.scores;
+        (<HTMLElement>document.querySelector('.score-right')).innerHTML = player2.scores;
         ball.restart(5);
     }
 
     if(ball.x > (canvas.width - 8)) {
         ball.xspeed = -ball.xspeed;
         player1.scores++;
-        document.querySelector('.score-left').innerHTML = player1.scores;
+        (<HTMLElement>document.querySelector('.score-left')).innerHTML = player1.scores;
         ball.restart(-5);
     }
 
@@ -114,7 +122,7 @@ let moveBall = (): void => {
     }        
 }
 
-let movePlayer = (p: object, u: number, d: number): void => {
+let movePlayer = (p: Player, u: number, d: number): void => {
     document.addEventListener('keydown', (e: any) => {
         if(e.keyCode == u && p.y / 2 > 0) {
             p.y -= p.speed;
@@ -140,8 +148,8 @@ let init = (): void => {
     player1 = new Paddle(0, canvas.height / 2 - 40);
     player2 = new Paddle(canvas.width - 20, canvas.height / 2 - 40);
 
-    document.querySelector('.score-left').innerHTML = player1.scores;
-    document.querySelector('.score-right').innerHTML = player2.scores;    
+    (<HTMLElement>document.querySelector('.score-left')).innerHTML = player1.scores;
+    (<HTMLElement>document.querySelector('.score-right')).innerHTML = player2.scores;    
     
     movePlayer(player1, 87, 83);
     movePlayer(player2, 38, 40);

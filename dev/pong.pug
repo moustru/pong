@@ -13,7 +13,7 @@ html
                 div.header-scoreboard
                     div.header-scores
                         span.score-left 0 
-                        : 
+                        | : 
                         span.score-right 0
             section.main-field
                 canvas#pong Ваш браузер не поддерживает API Canvas :c. Настоятельно рекомендую обновить браузер
@@ -23,4 +23,4 @@ html
             footer 
                 button.btns.btn-yes.btn-go(onclick="init();") Начать игру
                 button.btns.btn-no(onclick="stop();") Стоп
-        script(type="text/javascript", src="pong.js")
+        script(type="text/javascript", src="js/pong.js")

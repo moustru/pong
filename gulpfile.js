@@ -2,14 +2,12 @@ const gulp = require('gulp');
 const ts = require('gulp-typescript');
 const pug = require('gulp-pug');
 const sass = require('gulp-sass');
-const ttf2woff = require('ttf2woff');
-const ttf2woff2 = require('ttf2woff2');
 const rimraf = require('rimraf');
 
 const path = {
     dev: {
         pug: './dev/*.pug',
-        styles: './dev/scss/*.scss',
+        styles: './dev/scss/pong.scss',
         fonts: './dev/fonts/*.ttf',
         scripts: './dev/ts/*.ts'
     },
@@ -18,7 +16,7 @@ const path = {
         html: './build/',
         styles: './build/css/',
         fonts: './build/fonts/',
-        scripts: './dev/js/'
+        scripts: './build/js/'
     },
 
     clean: './build/*'
@@ -44,18 +42,13 @@ gulp.task('css', () => {
 })
 
 gulp.task('fonts', () => {
-    gulp.src(path.dev.fonts)
-        .pipe(ttf2woff())
-        .pipe(gulp.dest(path.build.fonts))
-    gulp.src(path.dev.fonts)
-        .pipe(ttf2woff2())
-        .pipe(gulp.dest(path.build.fonts))
+    gulp.src(path.dev.fonts).pipe(gulp.dest(path.build.fonts))
 });
 
 gulp.task('ts', () => {
     gulp.src(path.dev.scripts)
         .pipe(ts({
-            noImplicitAny: true,
+            noImplicitAny: false,
             outFile: 'pong.js'
         }))
         .pipe(gulp.dest(path.build.scripts))
