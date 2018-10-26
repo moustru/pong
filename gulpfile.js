@@ -1,12 +1,16 @@
 const gulp = require('gulp');
 const ts = require('gulp-typescript');
+const pug = require('gulp-pug');
+const sass = require('gulp-sass');
+const ttf2woff = require('ttf2woff');
+const ttf2woff2 = require('ttf2woff2');
 const rimraf = require('rimraf');
 
 const path = {
     dev: {
-        html: './dev/*.html',
-        styles: './dev/css/*.*',
-        fonts: './dev/fonts/*.*',
+        pug: './dev/*.pug',
+        styles: './dev/scss/*.scss',
+        fonts: './dev/fonts/*.ttf',
         scripts: './dev/ts/*.ts'
     },
 
@@ -21,22 +25,31 @@ const path = {
 }
 
 gulp.task('build', [
-    'html',
-    'styles',
+    'pug',
+    'css',
     'fonts',
     'ts'
 ]);
 
-gulp.task('html', () => {
-    gulp.src(path.dev.html).pipe(gulp.dest(path.build.html))
+gulp.task('pug', () => {
+    return gulp.src(path.dev.pug)
+        .pipe(pug())
+        .pipe(gulp.dest(path.build.html))
 });
 
-gulp.task('styles', () => {
-    gulp.src(path.dev.styles).pipe(gulp.dest(path.build.styles))
+gulp.task('css', () => {
+    gulp.src(path.dev.styles)
+        .pipe(sass().on('error', sass.logError))
+        .pipe(gulp.dest(path.build.styles))
 })
 
 gulp.task('fonts', () => {
-    gulp.src(path.dev.fonts).pipe(gulp.dest(path.build.fonts))
+    gulp.src(path.dev.fonts)
+        .pipe(ttf2woff())
+        .pipe(gulp.dest(path.build.fonts))
+    gulp.src(path.dev.fonts)
+        .pipe(ttf2woff2())
+        .pipe(gulp.dest(path.build.fonts))
 });
 
 gulp.task('ts', () => {
@@ -46,4 +59,8 @@ gulp.task('ts', () => {
             outFile: 'pong.js'
         }))
         .pipe(gulp.dest(path.build.scripts))
+});
+
+gulp.task('clean', (d) => {
+	rimraf(path.clean, d);
 });

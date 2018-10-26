@@ -316,15 +316,6 @@ SECTIONS
     .main-field .field-win .win-desc {
       font-size: 24px;
       color: #000; }
-  .main-field .field-lose {
-    display: none; }
-    .main-field .field-lose .lose-title {
-      padding-bottom: 30px;
-      font-size: 48px;
-      color: #000; }
-    .main-field .field-lose .lose-desc {
-      font-size: 24px;
-      color: #000; }
 
 /*
 ==========
