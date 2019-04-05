@@ -32,4 +32,4 @@ nbproject
 .tmp
 _tmp
 node_modules/
-build/
+dist/

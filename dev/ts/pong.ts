@@ -10,10 +10,10 @@ var ctx: any = canvas.getContext('2d');
 canvas.width = 1500;
 canvas.height = 600;
 
-var ball, player1, player2 :any;
+var ball: Ball, player1: any, player2 :any;
 var winRate: number = 15;
 
-let draw = (): void => {
+var draw = (): void => {
     ctx.fillStyle = '#000';
     ctx.fillRect(0, 0, canvas.width, canvas.height);
 
@@ -81,7 +81,7 @@ class Paddle extends Sprite {
     }
 }
 
-let moveBall = (): void => {
+var moveBall = (): void => {
     ball.x += ball.xspeed;
     ball.y += ball.yspeed;
 
@@ -122,7 +122,7 @@ let moveBall = (): void => {
     }        
 }
 
-let movePlayer = (p: Player, u: number, d: number): void => {
+var movePlayer = (p: Player, u: number, d: number): void => {
     document.addEventListener('keydown', (e: any) => {
         if(e.keyCode == u && p.y / 2 > 0) {
             p.y -= p.speed;
@@ -138,12 +138,12 @@ let movePlayer = (p: Player, u: number, d: number): void => {
     })
 }
 
-let start = (): void => {
+var start = (): void => {
     draw();
     moveBall();
 }
 
-let init = (): void => {
+var init = (): void => {
     ball = new Ball();
     player1 = new Paddle(0, canvas.height / 2 - 40);
     player2 = new Paddle(canvas.width - 20, canvas.height / 2 - 40);
