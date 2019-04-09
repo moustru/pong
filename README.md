@@ -1,11 +1,11 @@
 # pong
-Pong game on TypeScript
+Pong game
 
 Стек:
+* TypeScript
 * Pug
 * Canvas
 * SCSS
-* TypeScript
-* Gulp
+* Webpack
 
 Для просмотра продакшн-версии соберите проект командой ` npm run build `
