@@ -40,7 +40,7 @@ module.exports = {
             },
 
             {
-                test: /\.(sa|sc|c)ss$/,
+                test: /\.styl$/,
                 exclude: /node_modules/,
                 use: [
                     isDev ? 'style-loader' : MiniCssExtractPlugin.loader,
@@ -62,7 +62,7 @@ module.exports = {
                             ]
                         }
                     },
-                    'sass-loader'
+                    'stylus-loader'
                 ]
             },
 
