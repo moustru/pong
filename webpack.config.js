@@ -1,144 +1,62 @@
-const Webpack = require('webpack');
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const HtmlWebpackPLugin = require('html-webpack-plugin');
-const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
-const autoprefixer = require('autoprefixer');
-const cssnano = require('cssnano');
+const WebpackCfg = require('./webpack');
 const path = require('path');
-const argv = require('yargs').argv;
-const isDev = argv.mode === 'development';
-const isProd = !isDev;
+const isDev = process.env.NODE_ENV === 'development';
 
 module.exports = {
-    entry: './dev/app.js',
-    output: {
-        path: path.join(__dirname, 'dist'),
-        filename: 'js/app.js'
-    },
+  context: path.resolve(__dirname, 'src'),
+  mode: 'development',
+  entry: [ '@babel/polyfill', './app.js' ],
+  output: {
+    filename: WebpackCfg.filename('js'),
+    path: path.resolve(__dirname, 'build')
+  },
 
-    module: {
-        rules: [
-            {
-                test: /\.pug$/,
-                use: {
-                    loader: 'pug-loader',
-                    options: {
-                        pretty: true
-                    }
-                }
-            },
-
-            { 
-                test: /\.ts$/,
-                exclude: /node_modules/,
-                use: {
-                    loader: 'ts-loader',
-                    options: {
-                        configFile: 'tsconfig.json'
-                    }
-                }
-            },
-
-            {
-                test: /\.styl$/,
-                exclude: /node_modules/,
-                use: [
-                    isDev ? 'style-loader' : MiniCssExtractPlugin.loader,
-                    {
-                        loader: 'css-loader',
-                        options: {
-                            url: false
-                        }
-                    },
-
-                    {
-                        loader: 'postcss-loader',
-                        options: {
-                            plugins: [
-                                isProd ? cssnano : () => {},
-                                autoprefixer({
-                                    browsers: ['ie >=11', 'last 4 versions']
-                                })
-                            ]
-                        }
-                    },
-                    'stylus-loader'
-                ]
-            },
-
-            {
-                test: /\.(gif|png|jpe?g|svg)$/i,
-                use: [
-                    {
-                        loader: 'file-loader',
-                        options: {
-                            name: 'img/[name].[ext]'
-                        }        
-                    },
-
-                    {
-                        loader: 'image-webpack-loader',
-                        options: {
-                            mozjpeg: {
-                                progressive: true,
-                                quality: 70
-                            }
-                        }
-                    }
-                ]
-            },
-
-            {
-                test: /\.(ttf)$/,
-                use: {
-                    loader: 'file-loader',
-                    options: {
-                        name: 'fonts/[name].[ext]',
-                    }
-                }
-            }
-        ]
-    },
-
-    resolve: {
-        extensions: [ '.ts', '.tsx', '.js' ]
-    },
-
-    plugins: [
-        new Webpack.NoEmitOnErrorsPlugin(),
-        new HtmlWebpackPLugin({
-            filename: 'index.html',
-            template: './dev/pong.pug'
-        }),
-        new MiniCssExtractPlugin({
-            filename: 'css/app.css',
-            chunkFilename: 'css/[id].css' 
-        }),
-        new Webpack.HotModuleReplacementPlugin()
-    ],
-
-    optimization: isProd ? {
-        minimizer: [
-            new UglifyJsPlugin({
-                sourceMap: true,
-                uglifyOptions: {
-                    compress: {
-                        inline: false,
-                        warnings: false,
-                        drop_console: true,
-                        unsafe: true
-                    },
-                },
-            }),
-        ], 
-    } : {},
-
-    devServer: {
-        contentBase: path.resolve(__dirname, './dist'),
-        host: 'localhost',
-        port: 9000,
-        compress: true,
-        open: true,
-        hot: true
+  resolve: {
+    alias: {
+      '@': path.resolve(__dirname, 'src')
     }
-};
+  },
+
+  optimization: WebpackCfg.optimization(),
+  devtool: isDev ? 'source-map' : '',
+  devServer: {
+    port: 8081,
+    hot: isDev
+  },
+
+  plugins: WebpackCfg.plugins(),
+  module: {
+    rules: [
+      {
+        test: /\.pug$/,
+        use: {
+          loader: 'pug-loader',
+          options: {
+            pretty: true
+          }
+        }
+      },
+      {
+        test: /\.js$/,
+        exclude: /node_modules/,
+        use: WebpackCfg.jsLoaders()
+      },
+      {
+        test: /\.ts$/,
+        exclude: /node_modules/,
+        use: {
+          loader: 'babel-loader',
+          options: WebpackCfg.babelOptions('@babel/preset-typescript')
+        }
+      },
+      {
+        test: /\.styl$/,
+        use: WebpackCfg.cssLoaders('stylus-loader')
+      },
+      {
+        test: /\.ttf$/,
+        use: ['file-loader']
+      }
+    ]
+  }
+}
